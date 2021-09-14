@@ -4,12 +4,15 @@ A lib for dealing with modal without having to defining it locally it into your 
 
 You just need to:
 - add the plugin
-- create a component for your modal<sup>1</sup>
+- add the `<Modal/>` component into your root component (aka `<App/>`)
+- create a component for your modal<sup>*</sup>
 - "open" your modal component
 
-> :warning: Vue 3 only!
-
-> <sup>1</sup> read [Modal API](#modal-api) before using, don't "GO HORSE" 
+> :warning: &nbsp;&nbsp; Vue 3 only!  
+> :warning: &nbsp;&nbsp; CSS not included.  
+> 
+> <sup>*</sup> read [Modal API](#modal-api) before using, don't "GO HORSE" 
+> 
 ---
 
 # Content:
@@ -26,6 +29,7 @@ You just need to:
     - [Config](#config)
     - [Props](#props)
     - [Why returning a Promise?](#why-returning-a-promise)
+- [CSS](#css)
 
 ## Using
 
@@ -190,3 +194,45 @@ modals.open(ConfirmationModal)
 </script>
 ```
 ---
+
+## CSS
+
+This lib doesn't have any css with it, you are free to style your modals the way you like the most.  
+The only style treatment this lib does is blocking the page scroll when a modal is opened.
+
+The classes you must implement to style the modal backdrop and the modal placement is `modalContainer` and `modalContent`.  
+`modalContainer` is a container div used for background/backdrop.  
+`modalContent` is the only `modalContainer` child and it's were your Modal Component will be rendered.  
+
+### Example
+
+A simple css to open your modal with a black backdrop with your Modal placed in the center.
+
+Here it fix the `modalContainer` with full width and height and apply a black background color with 20% opacity.
+```css
+.modalContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0, .2);
+}
+```
+
+Here it places to `modalContent` in page center using relative top and left and set a flex display for your component to be rendered.
+```css
+.modalContainer .modalContent {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+```
