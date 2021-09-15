@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Plugin from './../../lib/main';
-import UseModalsSample from '../resource/UseModalsSample.vue';
+import UseModalsSample from '../../src/components/UseModalsSample.vue';
 import Modals from '../../lib/modals';
 
 it('should install Modals', () => {

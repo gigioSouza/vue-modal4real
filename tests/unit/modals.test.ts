@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
 import Plugin from './../../lib/main';
-import UseModalsSample from '../resource/UseModalsSample.vue';
+import UseModalsSample from '../../src/components/UseModalsSample.vue';
 
 
 beforeEach(() => {
@@ -17,7 +17,6 @@ describe('open', () => {
     });
 
     const modals = component.vm.$.appContext.provides.modals;
-    const modalsInstances = component.vm.$.appContext.provides.modalsInstances;
 
     const componentDef = {};
     const config = {

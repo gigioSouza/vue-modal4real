@@ -6,6 +6,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <h1>Modal {{ props.text }}</h1>
+  <div class="card">
+    <h1>PropsModal {{ props.text }}</h1>
+  </div>
 </template>
 

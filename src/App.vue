@@ -1,22 +1,63 @@
 <script setup lang="ts">
-import Modal1 from './components/Modal1.vue'
+import NestedModal1 from './components/NestedModal1.vue'
+import PropsModal from './components/PropsModal.vue'
+import SimpleModal from './components/SimpleModal.vue'
+import ResolveRejectModal from './components/ResolveRejectModal.vue'
 import { useModals } from '../lib/main';
+import { ref } from 'vue';
 
 const modals = useModals();
+const text = ref('');
 
-function open() {
-  modals.open(Modal1, null, { msg: "What's up?" });
+function openNestedModel1() {
+  modals.open(NestedModal1);
 }
 
+function openPropsModal() {
+  modals.open(PropsModal, null, { text: text.value });
+}
+
+function openSimpleModal() {
+  modals.open(SimpleModal, null, { text: text.value });
+}
+
+function openResolveRejectModal() {
+  modals.open(ResolveRejectModal, null, { text: text.value });
+}
 </script>
 
 <template>
   <h1>Let's use some modals</h1>
-  <button @click="open">Open Modal1</button>
+  <div class="grid">
+    <div>
+      <button @click="openNestedModel1()" class="openNestedModal1">Open NestedModal1</button>
+    </div>
+    <div>
+      <input type="text" id="text" v-model="text">
+      <button @click="openPropsModal()" class="openPropsModal">Open PropsModal</button>
+    </div>
+    <div>
+      <button @click="openSimpleModal()" class="openSimpleModal">Open SimpleModal</button>
+    </div>
+    <div>
+      <button @click="openResolveRejectModal()" class="openResolveRejectModal">Open ResolveRejectModal</button>
+    </div>
+  </div>
   <Modals/>
 </template>
 
 <style>
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.grid div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .modalContainer {
   position: fixed;
   width: 100vw;
@@ -38,5 +79,23 @@ function open() {
   width: 100%;
   height: 100%;
   padding: 16px;
+}
+
+.card {
+  background-color: white;
+  --tw-shadow-color: 0, 0, 0;
+  --tw-shadow: 0 1px 3px 0 rgba(var(--tw-shadow-color), 0.1), 0 1px 2px 0 rgba(var(--tw-shadow-color), 0.06);
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  padding: 1rem;
+  border-radius: .4rem;
+}
+
+.card h1 {
+  text-color: #333;
+}
+
+.card p {
+  text-color: #000;
 }
 </style>

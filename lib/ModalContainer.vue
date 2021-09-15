@@ -13,8 +13,11 @@ const emit = defineEmits<{
 const modalContainer: Ref<HTMLElement> = ref(null);
 const modalContent: Ref<HTMLElement> = ref(null);
 
-function onClickBackdrop() {
-  if (props.modal.config!.rejectOnBackdrop) {
+function onClick(event) {
+  if (
+    props.modal.config!.rejectOnBackdrop &&
+    [modalContainer.value, modalContent.value].includes(event.target)
+  ) {
     onReject();
   }
 }
@@ -34,13 +37,13 @@ function onReject(payload?: any) {
     ref="modalContainer"
     class="modalContainer"
     tabindex="-1"
-    @click.self="onClickBackdrop()"
+    @click="onClick($event)"
   >
     <div
       ref="modalContent"
       tabindex="-1"
       class="modalContent"
-      @click.self="onClickBackdrop()">
+      @click="onClick($event)">
       <component
         :is="props.modal.component"
         v-bind="props.modal.props"

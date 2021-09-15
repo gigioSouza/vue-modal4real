@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 import Plugin from './../../lib/main';
 import ModalsDispatcher from './../../lib/ModalsDispatcher.vue';
-import SimpleModal from '../resource/SimpleModal.vue';
-import PropsModal from '../resource/PropsModal.vue';
-import ResolveRejectModal from '../resource/ResolveRejectModal.vue';
+import SimpleModal from '../../src/components/SimpleModal.vue';
+import PropsModal from '../../src/components/PropsModal.vue';
+import ResolveRejectModal from '../../src/components/ResolveRejectModal.vue';
 import { nextTick } from 'vue';
 
 beforeEach(() => {
@@ -26,7 +26,7 @@ it('should render Modal Component', async () => {
   const modalNodes = document.body.querySelectorAll('.modalContainer .modalContent h1');
 
   expect(modalNodes).toHaveLength(1);
-  expect(modalNodes[0].textContent).toBe('Modal');
+  expect(modalNodes[0].textContent).toBe('SimpleModal');
 });
 
 it('should set props Modal Component', async () => {
@@ -38,14 +38,14 @@ it('should set props Modal Component', async () => {
 
   const modals = component.vm.$.appContext.provides.modals;
 
-  modals.open(PropsModal, null, { text: 'with props' });
+  modals.open(PropsModal, null, { text: 'text prop' });
 
   await nextTick();
 
   const modalNodes = document.body.querySelectorAll('.modalContainer .modalContent h1');
 
   expect(modalNodes).toHaveLength(1);
-  expect(modalNodes[0].textContent).toBe('Modal with props');
+  expect(modalNodes[0].textContent).toBe('PropsModal text prop');
 });
 
 describe('rejectOnBackdrop', () => {
@@ -65,7 +65,7 @@ describe('rejectOnBackdrop', () => {
 
       let modalNodes = document.body.querySelectorAll('.modalContainer');
 
-      expect(modalNodes[0].textContent).toBe('Modal');
+      expect(modalNodes[0].textContent).toBe('SimpleModal');
 
       (modalNodes[0] as HTMLElement).click();
 
@@ -92,7 +92,7 @@ describe('rejectOnBackdrop', () => {
 
       let modalNodes = document.body.querySelectorAll('.modalContainer .modalContent');
 
-      expect(modalNodes[0].textContent).toBe('Modal');
+      expect(modalNodes[0].textContent).toBe('SimpleModal');
 
       (modalNodes[0] as HTMLElement).click();
 
@@ -115,13 +115,13 @@ describe('rejectOnBackdrop', () => {
 
       const modals = component.vm.$.appContext.provides.modals;
 
-      const instance = modals.open(SimpleModal, { rejectOnBackdrop: false });
+      modals.open(SimpleModal, { rejectOnBackdrop: false });
 
       await nextTick();
 
       let modalNodes = document.body.querySelectorAll('.modalContainer');
 
-      expect(modalNodes[0].textContent).toBe('Modal');
+      expect(modalNodes[0].textContent).toBe('SimpleModal');
 
       (modalNodes[0] as HTMLElement).click();
 
@@ -141,13 +141,13 @@ describe('rejectOnBackdrop', () => {
 
       const modals = component.vm.$.appContext.provides.modals;
 
-      const instance = modals.open(SimpleModal, { rejectOnBackdrop: false })
+      modals.open(SimpleModal, { rejectOnBackdrop: false })
 
       await nextTick();
 
       let modalNodes = document.body.querySelectorAll('.modalContainer .modalContent');
 
-      expect(modalNodes[0].textContent).toBe('Modal');
+      expect(modalNodes[0].textContent).toBe('SimpleModal');
 
       (modalNodes[0] as HTMLElement).click();
 
