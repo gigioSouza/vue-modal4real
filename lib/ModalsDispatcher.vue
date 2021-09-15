@@ -1,18 +1,20 @@
 <script lang="ts" setup>
 import ModalContainer from './ModalContainer.vue';
-import { inject, UnwrapRef } from 'vue';
-import { Modal } from './modals';
+import { useModals } from './main';
+import { computed } from 'vue';
 
-const modals: UnwrapRef<Modal[]> | undefined = inject<UnwrapRef<Modal[]>>('modalsInstances');
-if (modals === undefined) {
-  console.error('You must `use` the Modals plugin: `app.use(Modals)`');
-}
+const modals = useModals();
+
+const modalsInstances = computed(() => {
+  if (modals == null) return [];
+  return modals.instances;
+})
 </script>
 
 <template>
   <teleport to="body">
     <ModalContainer
-      v-for="(modal, i) in modals"
+      v-for="(modal, i) in modalsInstances"
       :key="`modal_${i}`"
       :modal="modal"/>
   </teleport>

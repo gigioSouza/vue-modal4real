@@ -12,8 +12,12 @@ export default {
   }
 };
 
-export function useModals() {
-  return inject('modals');
+export function useModals(): Modals {
+  const modals = inject<Modals>('modals');
+  if (modals == null) {
+    console.error('You must `use` the Modals plugin: `app.use(Modals)`');
+  }
+  return modals as Modals;
 }
 
 export type {
