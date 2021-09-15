@@ -1,13 +1,14 @@
 import { App, inject } from 'vue';
-import ModalTeleport from './ModalTeleport.vue';
-import Modals, { Modal, ModalConfig, ModalDefinition } from './modals';
+import ModalsDispatcher from './ModalsDispatcher.vue';
+import Modals, { ModalConfig, Modal } from './modals';
 
 export default {
   install(app: App) {
-    app.component('Modal', ModalTeleport);
-    const modals = new Modals(app);
-    app.config.globalProperties.$modals = modals;
+    app.component('Modals', ModalsDispatcher);
+    const modals = new Modals();
     app.provide('modals', modals);
+    app.provide('modalsInstances', modals.instances);
+    app.config.globalProperties.$modals = modals;
   }
 };
 
@@ -16,8 +17,7 @@ export function useModals() {
 }
 
 export type {
-  Modals,
   Modal,
-  ModalConfig,
-  ModalDefinition
+  Modals,
+  ModalConfig
 };

@@ -15,7 +15,7 @@ const modalContent: Ref<HTMLElement> = ref(null);
 
 function onClick(event) {
   if (
-    props.modal.config?.rejectOnBackdrop &&
+    props.modal.config!.rejectOnBackdrop &&
     (modalContainer.value === event.target || modalContent.value === event.target)
   ) {
     onReject();

@@ -8,5 +8,15 @@ module.exports = {
     '^.+\\.vue$': 'vue-jest',
     '^.+\\.ts$': 'ts-jest',
   },
-  moduleFileExtensions: ['vue', 'ts']
+  moduleFileExtensions: ['vue', 'ts', 'js'],
+  testMatch: [
+    '**/tests/unit/**/*.test.(ts|tsx)'
+  ],
+  collectCoverage: false,
+  collectCoverageFrom: [
+    'lib/**/*.(ts|vue|js)',
+    '!**/node_modules/**',
+    '!**/vendor/**'
+  ],
+  coverageDirectory: './coverage'
 };

@@ -13,7 +13,7 @@ function open() {
 <template>
   <h1>Let's use some modals</h1>
   <button @click="open">Open Modal1</button>
-  <Modal/>
+  <Modals/>
 </template>
 
 <style>

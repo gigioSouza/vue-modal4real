@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { inject, UnwrapRef } from 'vue';
 import ModalContainer from './ModalContainer.vue';
+import { inject, UnwrapRef } from 'vue';
 import { Modal } from './modals';
 
-const modals: UnwrapRef<Modal[]> | undefined = inject<UnwrapRef<Modal[]>>('modals:modals');
+const modals: UnwrapRef<Modal[]> | undefined = inject<UnwrapRef<Modal[]>>('modalsInstances');
 if (modals === undefined) {
   console.error('You must `use` the Modals plugin: `app.use(Modals)`');
 }

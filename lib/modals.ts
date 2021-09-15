@@ -1,90 +1,62 @@
-import { App, Component, markRaw, reactive, UnwrapRef } from 'vue';
+import { Component, markRaw, reactive, UnwrapRef } from 'vue';
 
 type ModalProps = {
   [key: string]: any
 };
 
-export interface ModalDefinition {
-  component: Component,
-  config?: ModalConfig,
-  props?: ModalProps,
+export interface ModalWrapper extends Promise<any> {
+  modal: Modal
 }
 
 export interface ModalConfig {
   rejectOnBackdrop: boolean;
 }
 
-interface ModalInstace extends Promise<any> {
-  modal: Modal
-}
-
-export class Modal implements ModalDefinition{
-  readonly component: Component;
-  readonly config: ModalConfig;
-  readonly props: ModalProps;
-  public resolve: Function = () => {};
-  public reject: Function = () => {};
-
-  private constructor(component: Component, config: ModalConfig, props: ModalProps, resolveFn: Function, rejectFn: Function) {
-    this.component = component;
-    this.config = config;
-    this.props = props;
-    this.resolve = resolveFn;
-    this.reject = rejectFn;
-  }
-
-  static build(component: Component, config: ModalConfig, params: ModalProps): ModalInstace {
-    let resolveFn: Function;
-    let rejectFn: Function;
-    const promise = new Promise((resolve, reject) => {
-      resolveFn = resolve;
-      rejectFn = reject;
-    });
-    // @ts-ignore
-    promise.modal = new Modal(component, config, params, resolveFn, rejectFn);
-    return promise as ModalInstace;
-  }
+export interface Modal {
+  component: Component;
+  config: ModalConfig;
+  props: ModalProps;
+  resolve: Function;
+  reject: Function;
 }
 
 export default class Modals {
-  private app: App;
-  private modals: UnwrapRef<Modal[]> = reactive([]);
+  readonly instances: UnwrapRef<Modal[]> = reactive([]);
   private scrollBlocked = false;
 
-  constructor(app: App) {
-    this.app = app;
-    app.provide('modals:modals', this.modals);
-  }
-
-
-  public open(component: Component, config?: ModalConfig, props?: ModalProps): ModalInstace {
+  public open(component: Component, config?: ModalConfig|null, props?: ModalProps|null): ModalWrapper {
     if (config == null) {
       config = { rejectOnBackdrop: true };
     }
     if (props == null) {
       props = {};
     }
-    const modalInstace = Modal.build(component, config, props);
+    let { promise, resolve, reject } = destructuredPromise();
 
-    modalInstace
-      .then(value => {
-        this.dispose(modalInstace.modal);
-        return value;
-      })
-      .catch(value => {
-        this.dispose(modalInstace.modal);
-        return Promise.reject(value);
-      });
+    const modalWrapper = promise as ModalWrapper
+    modalWrapper.modal = {
+      component,
+      config,
+      props,
+      resolve: (value: any) => {
+        this.dispose(modalWrapper);
+        resolve(value);
+      },
+      reject: (value: any) => {
+        this.dispose(modalWrapper);
+        reject(value);
+      }
+    };
 
-    this.modals.push(markRaw(modalInstace.modal));
+    this.instances.push(markRaw(modalWrapper.modal));
     this.blockScroll();
 
-    return modalInstace;
+    return modalWrapper;
   }
 
-  public dispose(modal: Modal): void {
-    const index = this.modals.indexOf(modal);
-    this.modals.splice(index, 1);
+  public dispose(modalWrapper: ModalWrapper): void {
+    const index = this.instances.indexOf(modalWrapper.modal);
+    this.instances.splice(index, 1);
     this.releaseScroll();
   }
 
@@ -96,9 +68,21 @@ export default class Modals {
   }
 
   private releaseScroll(): void {
-    if (this.modals.length === 0) {
+    if (this.instances.length === 0) {
       this.scrollBlocked = false;
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
     }
   }
+}
+
+function destructuredPromise(): { promise: Promise<any>, resolve: Function, reject: Function } {
+  let resolve: Function;
+  let reject: Function;
+  const promise = new Promise((rs, rj) => {
+    resolve = rs;
+    reject = rj;
+  });
+
+  // @ts-ignore
+  return { promise, resolve, reject };
 }

@@ -4,7 +4,7 @@ A lib for dealing with modal without having to defining it locally it into your 
 
 You just need to:
 - add the plugin
-- add the `<Modal/>` component into your root component (aka `<App/>`)
+- add the `<Modals/>` component into your root component (aka `<App/>`)
 - create a component for your modal<sup>*</sup>
 - "open" your modal component
 
