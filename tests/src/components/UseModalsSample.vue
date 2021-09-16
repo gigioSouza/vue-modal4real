@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useModals } from '../../../src/main';
+import { useModals } from '../../../lib';
 
 export default {
   name: 'CompositionSample',

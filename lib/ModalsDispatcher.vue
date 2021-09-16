@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import ModalContainer from './ModalContainer.vue';
-import { useModals } from './main';
+import { useModals } from './index';
 import { computed } from 'vue';
 
 const modals = useModals();

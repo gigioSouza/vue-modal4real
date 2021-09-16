@@ -1,6 +1,5 @@
-import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
-import Plugin from './../../src/main';
+import { ModalsPlugin } from '../../lib';
 import UseModalsSample from '../src/components/UseModalsSample.vue';
 
 
@@ -12,7 +11,7 @@ describe('open', () => {
   it('should create ModalWrapper', () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -34,7 +33,7 @@ describe('open', () => {
   it('should add Modal to instance array', () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -57,7 +56,7 @@ describe('open', () => {
   it('should use default ModalConfig when omit config or null value', () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -77,7 +76,7 @@ describe('open', () => {
   it('should use create empty object when omit props or null value', () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -95,7 +94,7 @@ describe('open', () => {
   it('should block global scroll while opening a modal', () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -111,7 +110,7 @@ describe('open', () => {
   it('should release global scroll after all modals has being disposed', async () => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -140,7 +139,7 @@ describe('instances', () => {
   it('should remove Modal from instance array when resolve ModalWrapper', (done) => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 
@@ -162,7 +161,7 @@ describe('instances', () => {
   it('should remove Modal from instance array when reject ModalWrapper', (done) => {
     const component = mount(UseModalsSample, {
       global: {
-        plugins: [Plugin]
+        plugins: [ModalsPlugin]
       }
     });
 

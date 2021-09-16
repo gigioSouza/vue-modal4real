@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import Modal from './../../src/main';
+import { ModalsPlugin } from '../../lib';
 
 createApp(App)
-  .use(Modal)
+  .use(ModalsPlugin)
   .mount('#app');

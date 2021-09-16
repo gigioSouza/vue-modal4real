@@ -1,10 +1,10 @@
+import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
-import Plugin from './../../src/main';
-import ModalsDispatcher from './../../src/ModalsDispatcher.vue';
+import { ModalsPlugin } from '../../lib';
+import ModalsDispatcher from '../../lib/ModalsDispatcher.vue';
 import SimpleModal from '../src/components/SimpleModal.vue';
 import PropsModal from '../src/components/PropsModal.vue';
 import ResolveRejectModal from '../src/components/ResolveRejectModal.vue';
-import { nextTick } from 'vue';
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -13,7 +13,7 @@ beforeEach(() => {
 it('should render Modal Component', async () => {
   const component = mount(ModalsDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 
@@ -32,7 +32,7 @@ it('should render Modal Component', async () => {
 it('should set props Modal Component', async () => {
   const component = mount(ModalsDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 
@@ -53,7 +53,7 @@ describe('rejectOnBackdrop', () => {
     it('should reject modal on click in .modalContainer', async () => {
       const component = mount(ModalsDispatcher, {
         global: {
-          plugins: [Plugin]
+          plugins: [ModalsPlugin]
         }
       });
 
@@ -80,7 +80,7 @@ describe('rejectOnBackdrop', () => {
     it('should reject modal on click in .modalContent', async () => {
       const component = mount(ModalsDispatcher, {
         global: {
-          plugins: [Plugin]
+          plugins: [ModalsPlugin]
         }
       });
 
@@ -109,7 +109,7 @@ describe('rejectOnBackdrop', () => {
     it('should not reject modal on click in .modalContainer', async () => {
       const component = mount(ModalsDispatcher, {
         global: {
-          plugins: [Plugin]
+          plugins: [ModalsPlugin]
         }
       });
 
@@ -135,7 +135,7 @@ describe('rejectOnBackdrop', () => {
     it('should not reject modal on click in .modalContent', async () => {
       const component = mount(ModalsDispatcher, {
         global: {
-          plugins: [Plugin]
+          plugins: [ModalsPlugin]
         }
       });
 
@@ -163,7 +163,7 @@ describe('rejectOnBackdrop', () => {
 it('should resolve modal when receive a resolve event from Modal', async () => {
   const component = mount(ModalsDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 
@@ -188,7 +188,7 @@ it('should resolve modal when receive a resolve event from Modal', async () => {
 it('should reject modal when receive a reject event from Modal', async () => {
   const component = mount(ModalsDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 

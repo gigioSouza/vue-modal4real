@@ -1,8 +1,8 @@
 import { App, inject } from 'vue';
 import ModalsDispatcher from './ModalsDispatcher.vue';
-import Modals, { ModalConfig, Modal } from './modals';
+import { Modals, Modal, ModalConfig, ModalWrapper } from './modals';
 
-export default {
+export const ModalsPlugin = {
   install(app: App): void {
     app.component('Modals', ModalsDispatcher);
     const modals = new Modals();
@@ -20,8 +20,12 @@ export function useModals(): Modals {
   return modals as Modals;
 }
 
+export {
+  Modals
+}
+
 export type {
   Modal,
-  Modals,
-  ModalConfig
-};
+  ModalConfig,
+  ModalWrapper
+}

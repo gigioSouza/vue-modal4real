@@ -1,7 +1,7 @@
 import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
-import ModalDispatcher from './../../src/ModalsDispatcher.vue';
-import Plugin from '../../src/main';
+import ModalDispatcher from '../../lib/ModalsDispatcher.vue';
+import { ModalsPlugin } from '../../lib';
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -25,7 +25,7 @@ it('should throw error when using component without installing Plugin', () => {
 it('should inject modalsIntances and teleport to body', async () => {
   const component = mount(ModalDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 
@@ -43,7 +43,7 @@ it('should inject modalsIntances and teleport to body', async () => {
 it('should react to modalsIntances dispose', async () => {
   const component = mount(ModalDispatcher, {
     global: {
-      plugins: [Plugin]
+      plugins: [ModalsPlugin]
     }
   });
 

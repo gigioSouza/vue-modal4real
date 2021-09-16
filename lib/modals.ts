@@ -4,15 +4,15 @@ type ModalProps = {
   [key: string]: any
 };
 
-export interface ModalWrapper extends Promise<any> {
+interface ModalWrapper extends Promise<any> {
   modal: Modal
 }
 
-export interface ModalConfig {
+interface ModalConfig {
   rejectOnBackdrop: boolean;
 }
 
-export interface Modal {
+interface Modal {
   component: Component;
   config: ModalConfig;
   props: ModalProps;
@@ -20,7 +20,13 @@ export interface Modal {
   reject: Function;
 }
 
-export default class Modals {
+export {
+  ModalWrapper,
+  ModalConfig,
+  Modal
+}
+
+export class Modals {
   readonly instances: UnwrapRef<Modal[]> = reactive([]);
   private scrollBlocked = false;
 

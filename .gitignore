@@ -6,3 +6,4 @@ dist-ssr
 .idea
 *.iml
 coverage
+temp
