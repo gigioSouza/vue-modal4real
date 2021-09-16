@@ -5,15 +5,14 @@ import { Modal } from './modals';
 const props = defineProps<{
   modal: Modal
 }>();
-const emit = defineEmits<{
-  (e: 'resolve', value: any),
-  (e: 'reject', value: any)
-}>();
+const emit = defineEmits(['resolve', 'reject']);
 
+//@ts-ignore
 const modalContainer: Ref<HTMLElement> = ref(null);
+//@ts-ignore
 const modalContent: Ref<HTMLElement> = ref(null);
 
-function onClick(event) {
+function onClick(event: any): void {
   if (
     props.modal.config!.rejectOnBackdrop &&
     [modalContainer.value, modalContent.value].includes(event.target)
@@ -22,11 +21,11 @@ function onClick(event) {
   }
 }
 
-function onResolve(payload?: any) {
+function onResolve(payload?: any): void {
   props.modal.resolve(payload);
   emit('resolve', payload);
 }
-function onReject(payload?: any) {
+function onReject(payload?: any): void {
   props.modal.reject(payload);
   emit('reject', payload);
 }
