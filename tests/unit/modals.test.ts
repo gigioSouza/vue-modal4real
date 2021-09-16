@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
-import Plugin from './../../lib/main';
-import UseModalsSample from '../../src/components/UseModalsSample.vue';
+import Plugin from './../../src/main';
+import UseModalsSample from '../src/components/UseModalsSample.vue';
 
 
 beforeEach(() => {

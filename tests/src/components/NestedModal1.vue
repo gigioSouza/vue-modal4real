@@ -1,7 +1,5 @@
-<script
-  setup
-  lang="ts">
-import { useModals } from '../../lib/main';
+<script lang="ts" setup>
+import { useModals } from '../../../src/main';
 import NestedModal2 from './NestedModal2.vue';
 
 const emit = defineEmits(['resolve', 'reject']);

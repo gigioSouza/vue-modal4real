@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import NestedModal1 from './components/NestedModal1.vue'
 import PropsModal from './components/PropsModal.vue'
 import SimpleModal from './components/SimpleModal.vue'
 import ResolveRejectModal from './components/ResolveRejectModal.vue'
-import { useModals } from '../lib/main';
+import { useModals } from '../../src/main';
 import { ref } from 'vue';
 
 const modals = useModals();

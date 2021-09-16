@@ -15,6 +15,7 @@ module.exports = {
   collectCoverage: false,
   collectCoverageFrom: [
     'lib/**/*.(ts|vue|js)',
+    'test/src/**/*.(ts|vue|js)',
     '!**/node_modules/**',
     '!**/vendor/**'
   ],

@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import Plugin from './../../lib/main';
-import ModalsDispatcher from './../../lib/ModalsDispatcher.vue';
-import SimpleModal from '../../src/components/SimpleModal.vue';
-import PropsModal from '../../src/components/PropsModal.vue';
-import ResolveRejectModal from '../../src/components/ResolveRejectModal.vue';
+import Plugin from './../../src/main';
+import ModalsDispatcher from './../../src/ModalsDispatcher.vue';
+import SimpleModal from '../src/components/SimpleModal.vue';
+import PropsModal from '../src/components/PropsModal.vue';
+import ResolveRejectModal from '../src/components/ResolveRejectModal.vue';
 import { nextTick } from 'vue';
 
 beforeEach(() => {

@@ -1,7 +1,7 @@
 import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
-import ModalDispatcher from './../../lib/ModalsDispatcher.vue';
-import Plugin from '../../lib/main';
+import ModalDispatcher from './../../src/ModalsDispatcher.vue';
+import Plugin from '../../src/main';
 
 beforeEach(() => {
   document.body.innerHTML = '';
