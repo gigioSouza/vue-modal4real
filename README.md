@@ -18,6 +18,7 @@ You just need to:
 # Content:
 - [Using](#using)
   - [Add Plugin](#add-plugin) 
+  - [App.vue](#appvue-your-root-component)
   - [Composition API](#composition-api) 
   - [Options API](#options-api)
 - [Modal API](#modal-api)
@@ -42,6 +43,14 @@ import App from '@/App.vue';
 createApp(App)
   .use(Modals)
   .mount('#app');
+```
+
+### App.vue (your root Component)
+```vue
+<template>
+  ...
+  <Modals/>
+</template>
 ```
 
 ### Composition API
