@@ -25,15 +25,17 @@
   ],
   "main": "dist/vue-modal4real.umd.js",
   "module": "dist/vue-modal4real.es.js",
+  "types": "dist/vue-modal4real.d.ts",
   "scripts": {
     "start": "vite",
     "build": "vue-tsc --noEmit && vite build && tsc -p tsconfig.types.json && api-extractor run --local --verbose && rm -rf dist/lib",
     "serve": "vite preview",
     "test:unit": "cross-env NODE_ENV=test && jest --no-cache",
     "test:e2e": "start-server-and-test http-get://localhost:3000 cypress:run",
-    "coverage": "npm run test -- --coverage",
+    "coverage": "npm run test:unit -- --coverage",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.18.9",
