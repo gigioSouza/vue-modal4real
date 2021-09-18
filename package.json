@@ -20,8 +20,8 @@
     "url": "github:gigioSouza/vue-modal4real"
   },
   "files": [
-    "dist",
-    "index.d.ts"
+    "dist/*.js",
+    "vue-modal4real.d.ts"
   ],
   "main": "dist/vue-modal4real.umd.js",
   "module": "dist/vue-modal4real.es.js",
