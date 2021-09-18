@@ -1,6 +1,4 @@
-import { mount } from '@vue/test-utils';
-import { ModalsPlugin } from '../../lib';
-import UseModalsSample from '../src/components/UseModalsSample.vue';
+import { Modals } from '../../lib';
 
 
 beforeEach(() => {
@@ -9,14 +7,7 @@ beforeEach(() => {
 
 describe('open', () => {
   it('should create ModalWrapper', () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
-
+    const modals = new Modals();
     const componentDef = {};
     const config = {
       rejectOnBackdrop: true
@@ -31,36 +22,20 @@ describe('open', () => {
   });
 
   it('should add Modal to instance array', () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
+    const modals = new Modals();
 
-    const modals = component.vm.$.appContext.provides.modals;
-    const modalsInstances = component.vm.$.appContext.provides.modalsInstances;
-
-    expect(modalsInstances).toHaveLength(0);
     expect(modals.instances).toHaveLength(0);
 
     const instance = modals.open({});
 
-    expect(modalsInstances[0]).toBe(instance.modal);
     expect(modals.instances[0]).toBe(instance.modal);
 
-    expect(modalsInstances).toHaveLength(1);
     expect(modals.instances).toHaveLength(1);
   });
 
 
   it('should use default ModalConfig when omit config or null value', () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     const defaultConfig = {
       rejectOnBackdrop: true
@@ -74,13 +49,7 @@ describe('open', () => {
   });
 
   it('should use create empty object when omit props or null value', () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     const defaultProps = {};
 
@@ -92,13 +61,7 @@ describe('open', () => {
   });
 
   it('should block global scroll while opening a modal', () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     expect(document.body.style.overflow).toBe('');
 
@@ -108,13 +71,7 @@ describe('open', () => {
   });
 
   it('should release global scroll after all modals has being disposed', async () => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     expect(document.body.style.overflow).toBe('');
 
@@ -137,13 +94,7 @@ describe('open', () => {
 
 describe('instances', () => {
   it('should remove Modal from instance array when resolve ModalWrapper', (done) => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     const instance = modals.open({});
 
@@ -159,13 +110,7 @@ describe('instances', () => {
   });
 
   it('should remove Modal from instance array when reject ModalWrapper', (done) => {
-    const component = mount(UseModalsSample, {
-      global: {
-        plugins: [ModalsPlugin]
-      }
-    });
-
-    const modals = component.vm.$.appContext.provides.modals;
+    const modals = new Modals();
 
     const instance = modals.open({});
 

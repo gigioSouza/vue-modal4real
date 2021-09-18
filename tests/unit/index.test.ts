@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { ModalsPlugin } from '../../lib';
 import UseModalsSample from '../src/components/UseModalsSample.vue';
 
-it('should install Modals', () => {
+it('should install ModalsPlugin and provide modals and modalsInstances', () => {
   const component = mount(UseModalsSample, {
     global: {
       plugins: [ModalsPlugin]
