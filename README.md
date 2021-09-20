@@ -12,7 +12,10 @@ You just need to:
 > :warning: &nbsp;&nbsp; CSS not included.  
 > 
 > <sup>*</sup> read [Modal API](#modal-api) before using, don't "GO HORSE" 
-> 
+
+
+![npm bundle size](https://img.shields.io/bundlephobia/min/vue-modal4real?style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/vue-modal4real?style=flat-square)
 ---
 
 # Content:
