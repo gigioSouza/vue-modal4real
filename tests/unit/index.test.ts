@@ -2,12 +2,18 @@ import { mount } from '@vue/test-utils';
 import { ModalsPlugin } from '../../lib';
 import UseModalsSample from '../src/components/UseModalsSample.vue';
 
+function factory(config = {}) {
+  return mount(UseModalsSample, config);
+}
+
 it('should install ModalsPlugin and provide modals and modalsInstances', () => {
-  const component = mount(UseModalsSample, {
-    global: {
-      plugins: [ModalsPlugin]
+  const component = factory(
+    {
+      global: {
+        plugins: [ModalsPlugin]
+      }
     }
-  });
+  );
 
   const providedModals = component.vm.$.appContext.provides.modals;
   expect(providedModals).not.toBeUndefined();

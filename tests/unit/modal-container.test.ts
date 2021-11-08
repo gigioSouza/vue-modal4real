@@ -6,16 +6,23 @@ import SimpleModal from '../src/components/SimpleModal.vue';
 import PropsModal from '../src/components/PropsModal.vue';
 import ResolveRejectModal from '../src/components/ResolveRejectModal.vue';
 
+
+function factory(config = {}) {
+  return mount(ModalsDispatcher, config);
+}
+
 beforeEach(() => {
   document.body.innerHTML = '';
 })
 
 it('should render Modal Component', async () => {
-  const component = mount(ModalsDispatcher, {
-    global: {
-      plugins: [ModalsPlugin]
+  const component = factory(
+    {
+      global: {
+        plugins: [ModalsPlugin]
+      }
     }
-  });
+  );
 
   const modals = component.vm.$.appContext.provides.modals;
 
@@ -30,11 +37,13 @@ it('should render Modal Component', async () => {
 });
 
 it('should set props Modal Component', async () => {
-  const component = mount(ModalsDispatcher, {
-    global: {
-      plugins: [ModalsPlugin]
+  const component = factory(
+    {
+      global: {
+        plugins: [ModalsPlugin]
+      }
     }
-  });
+  );
 
   const modals = component.vm.$.appContext.provides.modals;
 
@@ -51,11 +60,13 @@ it('should set props Modal Component', async () => {
 describe('rejectOnBackdrop', () => {
   describe('when "true"', () => {
     it('should reject modal on click in .modalContainer', async () => {
-      const component = mount(ModalsDispatcher, {
-        global: {
-          plugins: [ModalsPlugin]
+      const component = factory(
+        {
+          global: {
+            plugins: [ModalsPlugin]
+          }
         }
-      });
+      );
 
       const modals = component.vm.$.appContext.provides.modals;
 
@@ -78,11 +89,13 @@ describe('rejectOnBackdrop', () => {
     });
 
     it('should reject modal on click in .modalContent', async () => {
-      const component = mount(ModalsDispatcher, {
-        global: {
-          plugins: [ModalsPlugin]
+      const component = factory(
+        {
+          global: {
+            plugins: [ModalsPlugin]
+          }
         }
-      });
+      );
 
       const modals = component.vm.$.appContext.provides.modals;
 
@@ -107,11 +120,13 @@ describe('rejectOnBackdrop', () => {
 
   describe('when "false"', () => {
     it('should not reject modal on click in .modalContainer', async () => {
-      const component = mount(ModalsDispatcher, {
-        global: {
-          plugins: [ModalsPlugin]
+      const component = factory(
+        {
+          global: {
+            plugins: [ModalsPlugin]
+          }
         }
-      });
+      );
 
       const modals = component.vm.$.appContext.provides.modals;
 
@@ -133,11 +148,13 @@ describe('rejectOnBackdrop', () => {
     });
 
     it('should not reject modal on click in .modalContent', async () => {
-      const component = mount(ModalsDispatcher, {
-        global: {
-          plugins: [ModalsPlugin]
+      const component = factory(
+        {
+          global: {
+            plugins: [ModalsPlugin]
+          }
         }
-      });
+      );
 
       const modals = component.vm.$.appContext.provides.modals;
 
@@ -161,11 +178,13 @@ describe('rejectOnBackdrop', () => {
 });
 
 it('should resolve modal when receive a resolve event from Modal', async () => {
-  const component = mount(ModalsDispatcher, {
-    global: {
-      plugins: [ModalsPlugin]
+  const component = factory(
+    {
+      global: {
+        plugins: [ModalsPlugin]
+      }
     }
-  });
+  );
 
   const modals = component.vm.$.appContext.provides.modals;
 
@@ -186,11 +205,13 @@ it('should resolve modal when receive a resolve event from Modal', async () => {
 });
 
 it('should reject modal when receive a reject event from Modal', async () => {
-  const component = mount(ModalsDispatcher, {
-    global: {
-      plugins: [ModalsPlugin]
+  const component = factory(
+    {
+      global: {
+        plugins: [ModalsPlugin]
+      }
     }
-  });
+  );
 
   const modals = component.vm.$.appContext.provides.modals;
 

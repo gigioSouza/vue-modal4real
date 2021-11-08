@@ -3,6 +3,10 @@ import { mount } from '@vue/test-utils';
 import ModalDispatcher from '../../lib/ModalsDispatcher.vue';
 import { ModalsPlugin } from '../../lib';
 
+function factory(config = {}) {
+  return mount(ModalDispatcher, config);
+}
+
 beforeEach(() => {
   document.body.innerHTML = '';
 });
@@ -12,7 +16,7 @@ it('should throw error when using component without installing Plugin', () => {
 
   console.error = jest.fn();
 
-  const component = mount(ModalDispatcher);
+  const component = factory();
 
   // @ts-ignore
   expect(console.error.mock.calls.length).toBe(1);
@@ -23,11 +27,9 @@ it('should throw error when using component without installing Plugin', () => {
 });
 
 it('should inject modalsIntances and teleport to body', async () => {
-  const component = mount(ModalDispatcher, {
-    global: {
-      plugins: [ModalsPlugin]
-    }
-  });
+  const component = factory({global: {
+    plugins: [ModalsPlugin]
+  }})
 
   const modals = component.vm.$.appContext.provides.modals;
 
@@ -41,11 +43,11 @@ it('should inject modalsIntances and teleport to body', async () => {
 });
 
 it('should react to modalsIntances dispose', async () => {
-  const component = mount(ModalDispatcher, {
+  const component = factory({ 
     global: {
-      plugins: [ModalsPlugin]
+      plugins: [ModalsPlugin],
     }
-  });
+  })
 
   const modals = component.vm.$.appContext.provides.modals;
 
